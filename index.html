@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BKK Motorbike Rental | Smart Digital Motorbike Rental Bangkok</title>
+  <meta name="description" content="Explore Bangkok on two wheels with BKK Motorbike Rental. Instant online booking, PromptPay QR payments, and keyless IoT Smart Key access. Standard & Premium fleet.">
+  <meta name="keywords" content="Bangkok motorbike rental, scooter rental Bangkok, rent scooter Thailand, smart bike rental, PromptPay rental">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛵</text></svg>">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- Leaflet Map CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body>
+
+  <!-- ==========================================
+       Top Navigation Bar
+       ========================================== -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">🛵</div>
+        <div>BKK <span class="highlight">RENTAL</span></div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#fleet-catalog" class="nav-link" data-i18n="nav_fleet">Our Fleet</a></li>
+        <li><a href="#how-it-works" class="nav-link" data-i18n="nav_how_it_works">How It Works</a></li>
+        <li><a href="#stations" class="nav-link" data-i18n="nav_locations">Stations</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="admin.html" class="nav-link" style="color: var(--color-accent);" data-i18n="nav_admin">Admin Portal</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Language Switcher -->
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="th">TH</button>
+        </div>
+
+        <!-- Digital Key Demo Trigger -->
+        <button id="nav-open-hud-btn" class="btn btn-sm btn-outline-accent">
+          <span>🔑</span> <span data-i18n="btn_smart_key_hud">Digital Key HUD</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       Hero Section & Quick Search Widget
+       ========================================== -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Left Hero Content -->
+        <div class="hero-content-col">
+          <div class="hero-badge">
+            <span class="pulse-dot"></span>
+            <span data-i18n="hero_badge">Smart Digital Fleet in Bangkok</span>
+          </div>
+
+          <h1 class="hero-title">
+            <span data-i18n="hero_title">Explore Bangkok with Smart Motorbike Rental</span>
+          </h1>
+
+          <p class="hero-description" data-i18n="hero_desc">
+            Instant online booking, PromptPay QR checkout, and contactless Smart Key IoT unlock. No passport holding. Pure freedom on two wheels.
+          </p>
+
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="#fleet-catalog" class="btn btn-primary">
+              <span>🛵</span> <span data-i18n="btn_search">Find Available Motorbikes</span>
+            </a>
+            <a href="#how-it-works" class="btn btn-secondary">
+              <span data-i18n="nav_how_it_works">How It Works</span>
+            </a>
+          </div>
+
+          <!-- Hero Metrics Bar -->
+          <div class="hero-stats-row">
+            <div class="hero-stat-item">
+              <h4>20 Units</h4>
+              <p data-i18n="stat_fleet">Standard & Premium Fleet</p>
+            </div>
+            <div class="hero-stat-item">
+              <h4>4.9 ★</h4>
+              <p data-i18n="stat_rating">Over 500+ Happy Riders</p>
+            </div>
+            <div class="hero-stat-item">
+              <h4>5 Hubs</h4>
+              <p data-i18n="stat_hubs">Across Central Bangkok</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Quick Booking Widget Card -->
+        <div class="hero-widget-col">
+          <div class="search-widget-card">
+            <div class="widget-header">
+              <h3 class="widget-title" data-i18n="hero_search_title">Book Your Ride</h3>
+              <div class="duration-presets">
+                <button class="preset-btn hero-preset-btn active" data-days="1" data-i18n="preset_1d">1 Day</button>
+                <button class="preset-btn hero-preset-btn" data-days="7" data-i18n="preset_7d">7 Days</button>
+                <button class="preset-btn hero-preset-btn" data-days="30" data-i18n="preset_30d">30 Days</button>
+              </div>
+            </div>
+
+            <div class="search-form-grid">
+              <div class="form-group search-field-full">
+                <label class="form-label" data-i18n="pickup_hub_label">📍 Pickup Station / Delivery</label>
+                <select id="search-location-select" class="form-select">
+                  <option value="sathorn">Sathorn Main Station (MRT Lumphini)</option>
+                  <option value="asok">Asok Interchange (BTS Asok / MRT Sukhumvit)</option>
+                  <option value="khaosan">Khaosan Road Station (Old Town)</option>
+                  <option value="thonglor">Thonglor Hub (BTS Thong Lo)</option>
+                  <option value="ari">Ari Hub (BTS Ari)</option>
+                  <option value="delivery">🛵 Doorstep Delivery (Hotel/Condo +฿200)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" data-i18n="pickup_date_label">📅 Start Date</label>
+                <input type="date" id="search-start-date" class="form-input">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" data-i18n="return_date_label">📅 End Date</label>
+                <input type="date" id="search-end-date" class="form-input">
+              </div>
+
+              <div class="form-group search-field-full">
+                <label class="form-label" data-i18n="tier_label">⚡ Motorbike Category</label>
+                <select id="search-tier-select" class="form-select">
+                  <option value="all" data-i18n="tier_all">All Categories (Standard & Premium)</option>
+                  <option value="standard" data-i18n="tier_standard">Standard Fleet (฿300/day • ฿1,900/wk • ฿5,500/mo)</option>
+                  <option value="premium" data-i18n="tier_premium">Premium Maxi & Vespa (฿450/day • ฿2,800/wk • ฿9,500/mo)</option>
+                </select>
+              </div>
+            </div>
+
+            <button id="btn-hero-search" class="btn btn-primary btn-block">
+              <span>🔍</span> <span data-i18n="btn_search">Find Available Motorbikes</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       Value Propositions & Why Choose Us
+       ========================================== -->
+  <section class="section" style="background: var(--bg-surface);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Next-Gen Mobility</span>
+        <h2 class="section-title">Why Choose BKK Motorbike Rental?</h2>
+        <p class="section-subtitle">We engineered a hassle-free rental experience designed for the modern rider in Bangkok.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon-box">📱</div>
+          <h3>100% Digital & Keyless</h3>
+          <p>Book online, scan PromptPay QR, and unlock your motorbike straight from your smartphone with our secure IoT Smart Key.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-box">🛡️</div>
+          <h3>Zero Passport Withholding</h3>
+          <p>We verify your passport or Thai ID digitally via secure in-app KYC. We never hold your original physical passport hostage.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-box">💎</div>
+          <h3>Transparent Tiered Pricing</h3>
+          <p>No hidden surprise fees. Clear daily, weekly, and monthly rates with refundable deposit and mandatory insurance included.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-box">🪖</div>
+          <h3>2 Sanitized Helmets & Gear</h3>
+          <p>Every rental includes two sanitized safety helmets, phone mount, rain poncho, and 24/7 roadside mechanical assistance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       Fleet Catalog Section
+       ========================================== -->
+  <section id="fleet-catalog" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" data-i18n="brand_title">Our Fleet</span>
+        <h2 class="section-title" data-i18n="fleet_title">Premium & Standard Fleet</h2>
+        <p class="section-subtitle" data-i18n="fleet_subtitle">
+          Well-maintained, fuel-injected automatic scooters with real-time GPS telemetry and smart digital access.
+        </p>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="fleet-filter-bar">
+        <button class="fleet-filter-btn active" data-tier="all" data-i18n="filter_all">All Vehicles (20 Units)</button>
+        <button class="fleet-filter-btn" data-tier="standard" data-i18n="filter_std">Standard Fleet (฿300/day)</button>
+        <button class="fleet-filter-btn" data-tier="premium" data-i18n="filter_prm">Premium Fleet (฿450/day)</button>
+      </div>
+
+      <!-- Catalog Cards Grid (Populated via JS) -->
+      <div id="fleet-catalog-grid" class="fleet-grid"></div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       How It Works in 4 Steps
+       ========================================== -->
+  <section id="how-it-works" class="section" style="background: var(--bg-surface);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Seamless Process</span>
+        <h2 class="section-title" data-i18n="how_title">How It Works in 4 Steps</h2>
+        <p class="section-subtitle" data-i18n="how_subtitle">Renting a motorbike in Bangkok has never been this seamless.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-icon">🛵</div>
+          <h4 data-i18n="step_1_title">1. Select & Book</h4>
+          <p data-i18n="step_1_desc">Choose your preferred motorbike, rental dates, and pickup station.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-icon">📸</div>
+          <h4 data-i18n="step_2_title">2. Instant KYC</h4>
+          <p data-i18n="step_2_desc">Quick photo upload of your driver's license and passport/Thai ID.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-icon">💳</div>
+          <h4 data-i18n="step_3_title">3. Scan & Pay</h4>
+          <p data-i18n="step_3_desc">Pay instantly via PromptPay QR, credit card, or mobile banking.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div class="step-icon">🔑</div>
+          <h4 data-i18n="step_4_title">4. Smart Unlock</h4>
+          <p data-i18n="step_4_desc">Walk up to your motorbike and unlock with your digital key in-app.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       Stations & Delivery Locations
+       ========================================== -->
+  <section id="stations" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" data-i18n="nav_locations">Pickup Network</span>
+        <h2 class="section-title">Bangkok Rental Stations</h2>
+        <p class="section-subtitle">Convenient pickup hubs located next to MRT and BTS lines, or doorstep delivery to your accommodation.</p>
+      </div>
+
+      <div class="locations-grid">
+        <div class="location-card">
+          <div class="location-icon">📍</div>
+          <div>
+            <h4>Sathorn Main Hub</h4>
+            <p>MRT Lumphini (Exit 1) • Full Service & Maintenance Center</p>
+          </div>
+        </div>
+
+        <div class="location-card">
+          <div class="location-icon">📍</div>
+          <div>
+            <h4>Asok Interchange Station</h4>
+            <p>BTS Asok / MRT Sukhumvit • Terminal 21 Junction</p>
+          </div>
+        </div>
+
+        <div class="location-card">
+          <div class="location-icon">📍</div>
+          <div>
+            <h4>Khaosan Road Station</h4>
+            <p>Rattanakosin Historic District & Tourist Hub</p>
+          </div>
+        </div>
+
+        <div class="location-card">
+          <div class="location-icon">📍</div>
+          <div>
+            <h4>Thonglor Lifestyle Hub</h4>
+            <p>Sukhumvit Soi 55 / BTS Thong Lo</p>
+          </div>
+        </div>
+
+        <div class="location-card">
+          <div class="location-icon">📍</div>
+          <div>
+            <h4>Ari Neighborhood Station</h4>
+            <p>BTS Ari / Phahonyothin Cafe District</p>
+          </div>
+        </div>
+
+        <div class="location-card" style="border-color: var(--color-accent);">
+          <div class="location-icon" style="background: rgba(255, 183, 3, 0.2); color: var(--color-accent);">🚚</div>
+          <div>
+            <h4>Doorstep Delivery & Pickup</h4>
+            <p>Delivered directly to your hotel or condominium within 15km (฿200 flat).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       Testimonials & Reviews
+       ========================================== -->
+  <section class="section" style="background: var(--bg-surface);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Rider Feedback</span>
+        <h2 class="section-title" data-i18n="reviews_title">Loved by Expats, Students & Travelers</h2>
+        <p class="section-subtitle">Read why riders in Bangkok choose our smart digital motorbike platform.</p>
+      </div>
+
+      <div id="reviews-grid" class="reviews-grid"></div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       Frequently Asked Questions
+       ========================================== -->
+  <section id="faq" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Answers</span>
+        <h2 class="section-title" data-i18n="faq_title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Everything you need to know about renting a motorbike in Bangkok.</p>
+      </div>
+
+      <div id="faq-accordion" class="faq-accordion"></div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       Floating Action Dock (MadBike Style)
+       ========================================== -->
+  <div class="floating-actions-dock">
+    <button class="float-action-btn btn-whatsapp" onclick="App.showToast('Connecting to WhatsApp Support (+66 82 123 4567)...', 'info')" title="WhatsApp">
+      💬
+    </button>
+    <button class="float-action-btn btn-line" onclick="App.showToast('Connecting to LINE Official (@BKKBike)...', 'info')" title="LINE">
+      🟢
+    </button>
+    <button class="float-action-btn btn-call" onclick="App.showToast('Emergency Roadside Assistance: 191 / 02-555-BIKE', 'danger')" title="Call SOS">
+      📞
+    </button>
+  </div>
+
+  <!-- ==========================================
+       Footer
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand">
+            <div class="brand-icon">🛵</div>
+            <div>BKK <span class="highlight">RENTAL</span></div>
+          </div>
+          <p>Thailand's premier digital motorbike rental service. Empowered with IoT keyless unlock, automated PromptPay payments, and comprehensive road insurance.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Fleet Categories</h4>
+          <ul class="footer-links">
+            <li><a href="#fleet-catalog">Honda Click 160cc (Standard)</a></li>
+            <li><a href="#fleet-catalog">Yamaha Scoopy-i 110cc</a></li>
+            <li><a href="#fleet-catalog">Honda Lead 125cc</a></li>
+            <li><a href="#fleet-catalog">Honda Forza 350cc (Premium)</a></li>
+            <li><a href="#fleet-catalog">Vespa Sprint 150cc</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#stations">Rental Stations</a></li>
+            <li><a href="#faq">Rental Requirements</a></li>
+            <li><a href="admin.html">Admin Fleet Portal</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact & Support</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.8;">
+            📍 Lumphini, Pathum Wan, Bangkok 10330<br>
+            📞 +66 (0) 2 555-BIKE<br>
+            💬 LINE: @bkkbikerental<br>
+            ⏰ Open Daily: 08:00 – 20:00
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 BKK Motorbike Rental Co., Ltd. Compliant with Thailand PDPA & DLT Regulations. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODAL 1: Multi-Step Booking & Payment Modal
+       ========================================================================== -->
+  <div id="booking-modal-overlay" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <span>🛵</span> <span>Reserve Your Motorbike</span>
+        </h3>
+        <button id="modal-close-btn" class="modal-close-btn">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Progress Steps Bar -->
+        <div class="booking-steps-bar">
+          <div class="step-item active" data-step="1">
+            <div class="step-bubble">1</div>
+            <span class="step-label">Duration</span>
+          </div>
+          <div class="step-item" data-step="2">
+            <div class="step-bubble">2</div>
+            <span class="step-label">Add-ons</span>
+          </div>
+          <div class="step-item" data-step="3">
+            <div class="step-bubble">3</div>
+            <span class="step-label">KYC Docs</span>
+          </div>
+          <div class="step-item" data-step="4">
+            <div class="step-bubble">4</div>
+            <span class="step-label">Payment</span>
+          </div>
+        </div>
+
+        <!-- Selected Bike Mini Banner -->
+        <div class="selected-bike-banner">
+          <img id="modal-selected-bike-img" src="assets/images/click160.jpg" alt="Selected Bike" class="selected-bike-img">
+          <div class="selected-bike-info">
+            <h4 id="modal-selected-bike-name">Honda Click 160 ABS</h4>
+            <p id="modal-selected-bike-rate">฿300/day • ฿1,900/wk • ฿5,500/mo</p>
+          </div>
+        </div>
+
+        <!-- Step 1 Panel: Duration & Location -->
+        <div id="booking-step-1" class="step-panel active">
+          <h4 style="color: #fff; margin-bottom: 1rem;">Select Rental Period & Pickup Hub</h4>
+          
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem;">
+            <button class="preset-btn modal-preset-btn active" data-days="1">1 Day</button>
+            <button class="preset-btn modal-preset-btn" data-days="7">7 Days (Discounted)</button>
+            <button class="preset-btn modal-preset-btn" data-days="30">30 Days (Best Value)</button>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="form-label">Pickup & Return Location</label>
+            <select id="modal-pickup-hub" class="form-select">
+              <option value="sathorn">Sathorn Main Hub (MRT Lumphini)</option>
+              <option value="asok">Asok Interchange (BTS Asok)</option>
+              <option value="khaosan">Khaosan Road Station</option>
+              <option value="thonglor">Thonglor Hub</option>
+              <option value="delivery">Doorstep Hotel/Condo Delivery (+฿200)</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label class="form-label">Customer Resident Status</label>
+            <select id="modal-residency" class="form-select" onchange="BookingEngine.bookingState.userType = this.value; BookingEngine.calculateTotal();">
+              <option value="international">Tourist / Expat (Passport & IDP Verification - ฿2,000/฿5,000 Deposit)</option>
+              <option value="domestic">Thai Citizen / Domestic ID (฿1,000/฿3,000 Deposit)</option>
+            </select>
+          </div>
+
+          <button class="btn btn-primary btn-block" onclick="BookingEngine.goToStep(2)">
+            Continue to Add-ons →
+          </button>
+        </div>
+
+        <!-- Step 2 Panel: Add-ons & Damage Protection -->
+        <div id="booking-step-2" class="step-panel">
+          <h4 style="color: #fff; margin-bottom: 1rem;">Protection & Optional Equipment</h4>
+
+          <div class="addons-list">
+            <label class="addon-card selected">
+              <div class="addon-left">
+                <input type="checkbox" id="addon-waiver-check" class="addon-checkbox" checked>
+                <div class="addon-text">
+                  <h5>Zero-Deductible Damage Waiver</h5>
+                  <p>Covers accidental scratches & body damage with ฿0 deductible</p>
+                </div>
+              </div>
+              <div class="addon-price">+฿80/day</div>
+            </label>
+
+            <label class="addon-card">
+              <div class="addon-left">
+                <input type="checkbox" id="addon-helmet-check" class="addon-checkbox">
+                <div class="addon-text">
+                  <h5>Full-Face Bluetooth Helmet Upgrade</h5>
+                  <p>Integrated intercom & HD audio speakers</p>
+                </div>
+              </div>
+              <div class="addon-price">+฿50/day</div>
+            </label>
+
+            <label class="addon-card">
+              <div class="addon-left">
+                <input type="checkbox" class="addon-checkbox" checked disabled>
+                <div class="addon-text">
+                  <h5>Shockproof Phone Mount & Rain Cover</h5>
+                  <p>Included with all rentals</p>
+                </div>
+              </div>
+              <div class="addon-price" style="color: var(--color-success);">FREE</div>
+            </label>
+          </div>
+
+          <div style="display: flex; gap: 1rem;">
+            <button class="btn btn-secondary" onclick="BookingEngine.goToStep(1)">← Back</button>
+            <button class="btn btn-primary btn-block" onclick="BookingEngine.goToStep(3)">Continue to KYC →</button>
+          </div>
+        </div>
+
+        <!-- Step 3 Panel: KYC Document Verification -->
+        <div id="booking-step-3" class="step-panel">
+          <h4 style="color: #fff; margin-bottom: 0.5rem;">Digital Identity Verification (KYC)</h4>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.25rem;">
+            Upload your passport or Thai ID + Driver's License. Documents are encrypted and watermarked per Thailand PDPA regulations.
+          </p>
+
+          <div id="kyc-dropzone-area" class="kyc-dropzone">
+            <div class="kyc-icon">📁</div>
+            <h4>Click or Drag & Drop Passport / ID Scan</h4>
+            <p>Supports JPG, PNG, PDF (Max 10MB) • Simulated Verification Ready</p>
+          </div>
+
+          <div id="kyc-preview-box" class="kyc-preview-card">
+            <div style="font-size: 2rem;">📄</div>
+            <div style="flex: 1;">
+              <div id="kyc-doc-filename" style="font-weight: 700; color: #fff;">Passport_Scan.jpg</div>
+              <span class="kyc-badge">✓ DLT & PDPA Verified</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem;">
+            <button class="btn btn-secondary" onclick="BookingEngine.goToStep(2)">← Back</button>
+            <button class="btn btn-primary btn-block" onclick="BookingEngine.goToStep(4)">Proceed to Payment →</button>
+          </div>
+        </div>
+
+        <!-- Step 4 Panel: PromptPay QR Checkout -->
+        <div id="booking-step-4" class="step-panel">
+          <h4 style="color: #fff; margin-bottom: 1rem;">Instant Digital Payment</h4>
+
+          <!-- Price Summary Breakdown -->
+          <div class="price-breakdown-box">
+            <div class="breakdown-row">
+              <span id="summary-duration-text">1 Day(s) Rental</span>
+              <span id="summary-rental-fee">฿300</span>
+            </div>
+            <div class="breakdown-row">
+              <span>Protection & Add-ons</span>
+              <span id="summary-addons-fee">฿80</span>
+            </div>
+            <div class="breakdown-row">
+              <span>Station Delivery / Pickup</span>
+              <span id="summary-delivery-fee">Free</span>
+            </div>
+            <div class="breakdown-row">
+              <span>Refundable Security Deposit</span>
+              <span id="summary-deposit-fee">฿2,000</span>
+            </div>
+            <div class="breakdown-row total-row">
+              <span>Total Payable Now</span>
+              <span id="summary-grand-total" class="total-amount">฿2,380</span>
+            </div>
+          </div>
+
+          <!-- PromptPay QR Container -->
+          <div class="qr-payment-card">
+            <div class="promptpay-header">
+              <span class="promptpay-logo-badge">PROMPTPAY QR</span>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">Scan via any Thai Banking App</span>
+            </div>
+
+            <div class="qr-canvas-wrap">
+              <canvas id="promptpay-qr-canvas"></canvas>
+            </div>
+
+            <div class="payment-timer">
+              Payment window expires in: <span id="qr-timer-countdown">10:00</span>
+            </div>
+          </div>
+
+          <button id="btn-simulate-pay" class="btn btn-primary btn-block" onclick="BookingEngine.simulateInstantPayment()">
+            <span>⚡</span> Simulate PromptPay Payment Confirmation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 2: Smart Key Remote Controller HUD (Demo Mode)
+       ========================================================================== -->
+  <div id="smart-key-modal-overlay" class="modal-overlay">
+    <div class="modal-container smart-key-container">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <span>🔑</span> <span>IoT Smart Key Controller</span>
+        </h3>
+        <button id="hud-close-btn" class="modal-close-btn">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="smart-fob-hud">
+          <div id="hud-bike-title" style="font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 0.25rem;">
+            Honda Click 160 ABS
+          </div>
+          <div id="hud-plate-number" style="color: var(--color-accent); font-weight: 700; font-size: 0.95rem; margin-bottom: 0.25rem;">
+            1กข-4920 กทม.
+          </div>
+          <small id="hud-iot-device" style="color: var(--text-muted); display: block; margin-bottom: 1.75rem;">
+            IoT ID: IOT-CL160-01
+          </small>
+
+          <!-- Interactive Lock Ring -->
+          <div id="hud-status-ring" class="smart-fob-status-ring locked">
+            <div id="hud-fob-icon" class="fob-icon">🔒</div>
+            <div id="hud-state-text" class="fob-state-text">LOCKED • IMMOBILIZER ON</div>
+          </div>
+
+          <!-- Live Telemetry Gauges -->
+          <div class="smart-metrics-grid">
+            <div class="metric-pill">
+              <h5>SPEED</h5>
+              <p id="hud-speed-gauge">0 km/h</p>
+            </div>
+            <div class="metric-pill">
+              <h5>FUEL LEVEL</h5>
+              <p id="hud-fuel-level">95%</p>
+            </div>
+            <div class="metric-pill">
+              <h5>BATTERY</h5>
+              <p id="hud-battery-volt">12.6V</p>
+            </div>
+          </div>
+
+          <!-- Trip Info -->
+          <div style="display: flex; justify-content: space-between; background: var(--bg-surface-elevated); padding: 0.9rem 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; font-size: 0.9rem;">
+            <div>Trip Duration: <strong id="hud-trip-timer" style="color: var(--color-accent);">00:00</strong></div>
+            <div>Trip Distance: <strong id="hud-trip-dist" style="color: var(--color-accent);">0.00 km</strong></div>
+          </div>
+
+          <!-- Actions -->
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <button id="btn-hud-toggle-lock" class="btn btn-primary btn-block">
+              <span>🔑</span> Tap to Unlock Motorbike
+            </button>
+            <button id="btn-hud-return-bike" class="btn btn-secondary btn-block">
+              <span>🏁</span> Return Vehicle & Release Deposit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/translations.js"></script>
+  <script src="js/booking.js"></script>
+  <script src="js/smart-key.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+/* ==========================================================================
+   BKK Motorbike Rental - Admin Fleet Dashboard Styles
+   ========================================================================== */
+
+.admin-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+  background: var(--bg-body);
+}
+
+/* --- Admin Sidebar --- */
+.admin-sidebar {
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-subtle);
+  padding: 2rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.admin-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.admin-nav-item a {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.admin-nav-item.active a, .admin-nav-item a:hover {
+  background: var(--bg-surface-elevated);
+  color: var(--color-accent);
+}
+
+.admin-nav-item.active a {
+  background: rgba(255, 183, 3, 0.12);
+  border: 1px solid rgba(255, 183, 3, 0.3);
+}
+
+/* --- Admin Main Content --- */
+.admin-main {
+  padding: 2.5rem 3rem;
+  overflow-y: auto;
+}
+
+.admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.admin-title-wrap h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.admin-title-wrap p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* KPI Cards Grid */
+.admin-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-accent);
+}
+
+.kpi-card.success::before { background: var(--color-success); }
+.kpi-card.info::before { background: var(--color-secondary); }
+.kpi-card.warning::before { background: var(--color-warning); }
+
+.kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.kpi-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.kpi-icon {
+  font-size: 1.25rem;
+  color: var(--color-accent);
+}
+
+.kpi-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.kpi-footer {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.kpi-trend-up {
+  color: var(--color-success);
+  font-weight: 700;
+}
+
+/* Break-Even Progress Bar Card */
+.breakeven-card {
+  grid-column: span 4;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.breakeven-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.progress-track {
+  height: 14px;
+  background: var(--bg-surface-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-secondary), var(--color-accent), var(--color-success));
+  border-radius: var(--radius-full);
+  transition: width 1s ease-in-out;
+}
+
+.breakeven-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Map & Fleet Section */
+.admin-grid-split {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.fleet-map-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-container {
+  width: 100%;
+  height: 420px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #0f172a;
+  border: 1px solid var(--border-subtle);
+}
+
+/* Fleet Table */
+.fleet-table-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+.table-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.admin-table th {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-glass);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.admin-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.9rem;
+  color: var(--text-main);
+  vertical-align: middle;
+}
+
+.admin-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.status-available { background: var(--color-success-bg); color: var(--color-success); }
+.status-rented { background: rgba(2, 132, 199, 0.15); color: #38bdf8; }
+.status-maintenance { background: rgba(245, 158, 11, 0.15); color: var(--color-warning); }
+
+@media (max-width: 1200px) {
+  .admin-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .breakeven-card { grid-column: span 2; }
+  .admin-grid-split { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .admin-layout { grid-template-columns: 1fr; }
+  .admin-sidebar { display: none; }
+  .admin-main { padding: 1.5rem; }
+}
