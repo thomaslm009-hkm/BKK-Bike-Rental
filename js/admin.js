@@ -32,9 +32,6 @@ const AdminPortal = {
     });
     currentMonthlyRevenue += 84500; // baseline day-rate transactions for demo
 
-    const FIXED_COST_BREAKEVEN = 168000;
-    const breakevenPct = Math.min(100, Math.round((currentMonthlyRevenue / FIXED_COST_BREAKEVEN) * 100));
-
     const setTxt = (id, val) => {
       const el = document.getElementById(id);
       if (el) el.textContent = val;
@@ -45,11 +42,6 @@ const AdminPortal = {
     setTxt('admin-kpi-maintenance', `${maintenance} ${maintenance === 1 ? 'Unit' : 'Units'}`);
     setTxt('admin-kpi-revenue', `฿${currentMonthlyRevenue.toLocaleString()}`);
     setTxt('admin-kpi-utilization-text', `${utilizationPct}% Fleet Utilization (20 Total)`);
-    setTxt('admin-breakeven-progress-text', `${breakevenPct}% of ฿168,000 Fixed Cost Target`);
-    setTxt('admin-breakeven-current-rev', `฿${currentMonthlyRevenue.toLocaleString()}`);
-
-    const fill = document.getElementById('admin-breakeven-fill');
-    if (fill) fill.style.width = `${breakevenPct}%`;
 
     // Update filter buttons live counters
     setTxt('filter-btn-all', `All (${totalBikes})`);

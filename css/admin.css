@@ -155,45 +155,6 @@
   font-weight: 700;
 }
 
-/* Break-Even Progress Bar Card */
-.breakeven-card {
-  grid-column: span 4;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem 2rem;
-  margin-bottom: 2.5rem;
-}
-
-.breakeven-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.progress-track {
-  height: 14px;
-  background: var(--bg-surface-elevated);
-  border-radius: var(--radius-full);
-  overflow: hidden;
-  position: relative;
-  margin-bottom: 0.75rem;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--color-secondary), var(--color-accent), var(--color-success));
-  border-radius: var(--radius-full);
-  transition: width 1s ease-in-out;
-}
-
-.breakeven-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
 
 /* Map & Fleet Section */
 .admin-grid-split {
@@ -621,7 +582,6 @@
 
 @media (max-width: 1200px) {
   .admin-kpi-grid { grid-template-columns: repeat(2, 1fr); }
-  .breakeven-card { grid-column: span 2; }
   .admin-grid-split { grid-template-columns: 1fr; }
   .fleet-status-board { grid-template-columns: 1fr; }
 }
