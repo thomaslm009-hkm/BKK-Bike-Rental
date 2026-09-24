@@ -20,7 +20,7 @@
   <div class="admin-layout">
     <!-- Sidebar -->
     <aside class="admin-sidebar">
-      <div class="admin-brand">
+      <div class="admin-brand" style="cursor: pointer;" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" title="Back to Top">
         <div class="brand-icon" style="width: 36px; height: 36px; font-size: 1.1rem;">🛵</div>
         <div>BKK <span style="color: var(--color-accent);">FLEET OPS</span></div>
       </div>
@@ -49,7 +49,7 @@
     </aside>
 
     <!-- Main Content Area -->
-    <main class="admin-main">
+    <main id="admin-top" class="admin-main">
       <div class="admin-topbar">
         <div class="admin-title-wrap">
           <h1>Bangkok Fleet Operations Hub</h1>

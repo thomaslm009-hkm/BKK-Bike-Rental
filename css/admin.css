@@ -7,24 +7,27 @@ html {
 }
 
 .admin-layout {
-  display: grid;
-  grid-template-columns: 260px 1fr;
   min-height: 100vh;
   background: var(--bg-body);
+  position: relative;
 }
 
-/* --- Admin Sidebar --- */
+/* --- Admin Sidebar (Permanently Fixed in Viewport) --- */
 .admin-sidebar {
   background: var(--bg-surface);
   border-right: 1px solid var(--border-subtle);
   padding: 2rem 1.25rem;
   display: flex;
   flex-direction: column;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  bottom: 0;
+  width: 260px;
   height: 100vh;
   overflow-y: auto;
-  z-index: 100;
+  z-index: 1000;
+  box-sizing: border-box;
 }
 
 .admin-sidebar::-webkit-scrollbar {
@@ -80,10 +83,14 @@ html {
 
 /* --- Admin Main Content --- */
 .admin-main {
+  margin-left: 260px;
+  width: calc(100% - 260px);
   padding: 2.5rem 3rem;
   min-width: 0;
+  box-sizing: border-box;
 }
 
+#admin-top,
 #fleet-map-section,
 #fleet-status-board-section,
 #fleet-table-section {
@@ -611,7 +618,10 @@ html {
 }
 
 @media (max-width: 768px) {
-  .admin-layout { grid-template-columns: 1fr; }
   .admin-sidebar { display: none; }
-  .admin-main { padding: 1.5rem; }
+  .admin-main {
+    margin-left: 0;
+    width: 100%;
+    padding: 1.5rem;
+  }
 }
