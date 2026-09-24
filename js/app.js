@@ -17,6 +17,7 @@ const App = {
     // Init modules
     BookingEngine.init();
     SmartKeyHUD.init();
+    if (window.ReviewsManager) ReviewsManager.init();
     if (window.AdminPortal) AdminPortal.init();
   },
 
@@ -93,6 +94,10 @@ const App = {
   },
 
   renderReviews() {
+    if (window.ReviewsManager) {
+      ReviewsManager.renderReviews();
+      return;
+    }
     const grid = document.getElementById('reviews-grid');
     if (!grid) return;
     grid.innerHTML = REVIEWS_DATA.map(r => `

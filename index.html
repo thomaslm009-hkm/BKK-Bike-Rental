@@ -336,7 +336,46 @@
         <p class="section-subtitle">Read why riders in Bangkok choose our smart digital motorbike platform.</p>
       </div>
 
+      <!-- Reviews Action Bar & Summary -->
+      <div class="reviews-action-bar">
+        <div class="reviews-rating-summary">
+          <div class="rating-big-badge">
+            <span class="rating-num">4.9</span>
+            <div class="rating-stars-wrap">
+              <span class="stars">★★★★★</span>
+              <span class="rating-count" id="reviews-total-count">144+ Verified Reviews</span>
+            </div>
+          </div>
+          <div class="rating-features">
+            <span class="rating-feature-pill">🛡️ 100% Genuine Renters</span>
+            <span class="rating-feature-pill">⚡ Keyless Verified</span>
+          </div>
+        </div>
+        <div class="reviews-btn-group">
+          <button id="btn-open-review-modal" class="btn btn-accent btn-write-review">
+            <span>✍️</span> <span>Write a Review</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Top Featured Reviews Grid -->
       <div id="reviews-grid" class="reviews-grid"></div>
+
+      <!-- Expandable "See More" Reviews Section -->
+      <div id="reviews-more-wrapper" class="reviews-more-wrapper" style="display: none;">
+        <div class="reviews-more-divider">
+          <span>More Verified Customer Stories</span>
+        </div>
+        <div id="reviews-more-grid" class="reviews-grid"></div>
+      </div>
+
+      <!-- See More Toggle Button -->
+      <div style="text-align: center; margin-top: 2rem;">
+        <button id="btn-toggle-more-reviews" class="btn btn-secondary btn-see-more-reviews">
+          <span id="btn-toggle-more-icon">💬</span>
+          <span id="btn-toggle-more-text">See More Reviews</span>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -692,6 +731,145 @@
   </div>
 
   <!-- ==========================================================================
+       MODAL 3: Customer Review Submission (Gmail / Google Login, No Backend)
+       ========================================================================== -->
+  <div id="review-modal-overlay" class="modal-overlay">
+    <div class="modal-container review-modal-container">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">
+            <span>✍️</span> <span>Customer Rider Review</span>
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0.2rem 0 0;">
+            Share your Bangkok riding experience with fellow travelers & expats
+          </p>
+        </div>
+        <button id="review-modal-close-btn" class="modal-close-btn">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- 1. Google / Gmail Verification Section -->
+        <div class="review-auth-card" id="review-auth-card">
+          <!-- Logged Out State -->
+          <div id="review-auth-logged-out" class="auth-logged-out">
+            <div class="google-auth-header">
+              <svg width="22" height="22" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+              </svg>
+              <div>
+                <strong style="color: #fff; font-size: 0.95rem; display: block;">Sign in with Google Account</strong>
+                <span style="color: var(--text-muted); font-size: 0.78rem;">Ensures verified genuine reviews & builds trust in our rider community</span>
+              </div>
+            </div>
+
+            <button type="button" id="btn-google-login" class="btn-google-sign-in">
+              <svg width="18" height="18" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+              </svg>
+              <span>Continue with Google / Gmail</span>
+            </button>
+
+            <div class="auth-divider"><span>or enter your Gmail address</span></div>
+
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <input type="email" id="custom-gmail-input" class="form-input" placeholder="e.g. yourname@gmail.com" style="margin: 0; font-size: 0.88rem; flex: 1;">
+              <button type="button" id="btn-custom-gmail-submit" class="btn btn-secondary btn-sm" style="white-space: nowrap; padding: 0.65rem 1rem;">
+                Connect Gmail
+              </button>
+            </div>
+          </div>
+
+          <!-- Logged In State -->
+          <div id="review-auth-logged-in" class="auth-logged-in" style="display: none;">
+            <div class="user-profile-badge">
+              <div id="auth-user-avatar" class="user-avatar-circle">TL</div>
+              <div class="user-info-text">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <strong id="auth-user-name" style="color: #fff; font-size: 0.95rem;">Thomas Lee</strong>
+                  <span class="verified-tag">✓ Verified Google Reviewer</span>
+                </div>
+                <span id="auth-user-email" style="color: var(--text-muted); font-size: 0.8rem;">thomas.rider.bkk@gmail.com</span>
+              </div>
+            </div>
+            <button type="button" id="btn-auth-switch" class="btn-text-sm" title="Switch Gmail account">Switch Account</button>
+          </div>
+        </div>
+
+        <!-- 2. Review Form Details -->
+        <form id="customer-review-form" onsubmit="event.preventDefault(); ReviewsManager.handleReviewSubmit();">
+          <!-- Star Rating -->
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <label class="form-label" style="margin: 0;">Overall Rating</label>
+              <span id="rating-text-feedback" style="color: var(--color-accent); font-weight: 700; font-size: 0.85rem;">5.0 - Exceptional Experience!</span>
+            </div>
+            <div class="interactive-star-rating" id="interactive-star-rating">
+              <span class="star-btn active" data-rating="1" title="1 Star">★</span>
+              <span class="star-btn active" data-rating="2" title="2 Stars">★</span>
+              <span class="star-btn active" data-rating="3" title="3 Stars">★</span>
+              <span class="star-btn active" data-rating="4" title="4 Stars">★</span>
+              <span class="star-btn active" data-rating="5" title="5 Stars">★</span>
+            </div>
+          </div>
+
+          <!-- Motorbike Rented & Rider Persona -->
+          <div class="form-row review-form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+            <div class="form-group">
+              <label class="form-label">Motorbike Rented</label>
+              <select id="review-bike-select" class="form-select" required>
+                <option value="Honda Click 160 ABS">Honda Click 160 ABS</option>
+                <option value="Honda PCX 160 e:HEV">Honda PCX 160 e:HEV</option>
+                <option value="Honda Forza 350 ABS">Honda Forza 350 ABS</option>
+                <option value="Vespa Sprint 150 i-Get">Vespa Sprint 150 i-Get</option>
+                <option value="Honda Scoopy Club12">Honda Scoopy Club12</option>
+                <option value="Yamaha Grand Filano Hybrid">Yamaha Grand Filano Hybrid</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Rider Profile / Category</label>
+              <select id="review-role-select" class="form-select">
+                <option value="Bangkok Expat">Bangkok Expat</option>
+                <option value="Tourist / Traveler">Tourist / Traveler</option>
+                <option value="Digital Nomad">Digital Nomad</option>
+                <option value="Student">Student</option>
+                <option value="Local Commuter">Local Commuter</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Review Title -->
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label class="form-label">Review Headline</label>
+            <input type="text" id="review-title-input" class="form-input" placeholder="e.g. Flawless IoT keyless unlock & super clean bike!" required>
+          </div>
+
+          <!-- Review Body -->
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label class="form-label">Your Experience / Feedback</label>
+            <textarea id="review-comment-input" class="form-input" rows="3" placeholder="Share details of your ride, vehicle performance, keyless experience, pickup station, or tips for other riders..." required></textarea>
+          </div>
+
+          <!-- Actions -->
+          <div style="display: flex; gap: 0.75rem; justify-content: flex-end; align-items: center;">
+            <button type="button" id="review-cancel-btn" class="btn btn-secondary">
+              Cancel
+            </button>
+            <button type="submit" id="btn-submit-review" class="btn btn-primary" style="min-width: 175px;">
+              <span>🚀</span> <span>Publish Review</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
        FLOATING ACTIVE RIDE TELEMETRY WIDGET (Persistent Mini HUD)
        ========================================================================== -->
   <aside id="floating-ride-widget" class="floating-ride-widget" aria-label="Active Ride Telemetry Monitor" style="display: none;">
@@ -742,6 +920,7 @@
   <script src="js/translations.js"></script>
   <script src="js/booking.js"></script>
   <script src="js/smart-key.js"></script>
+  <script src="js/reviews.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

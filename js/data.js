@@ -417,29 +417,104 @@ const LOCATIONS_DATA = [
   { id: 'delivery', name: 'Doorstep Hotel/Condo Delivery', area: 'Any location in Bangkok (within 15km)', fee: 200 }
 ];
 
-const REVIEWS_DATA = [
+const INITIAL_REVIEWS_DATA = [
   {
+    id: 'rev-01',
     name: 'Alexandre Meyer',
+    email: 'alexandre.m@gmail.com',
     role: 'Expat Software Lead from France',
+    bike: 'Honda Forza 350 ABS',
     rating: 5,
+    title: 'Top tier maxi-scooter with zero paperwork hassle',
     comment: 'Rented the Honda Forza 350 for 2 months. The digital PromptPay checkout and instant unlock key are brilliant! Way smoother than traditional Bangkok shops.',
-    avatar: 'AM'
+    avatar: 'AM',
+    date: '2 days ago',
+    verifiedGoogle: true
   },
   {
+    id: 'rev-02',
     name: 'Ploy Siriwat',
+    email: 'ploy.chula@gmail.com',
     role: 'Chulalongkorn University Student',
+    bike: 'Honda Scoopy Club12',
     rating: 5,
+    title: 'Affordable student package and fast refund',
     comment: 'The student discount and Scoopy monthly package saved me so much transit time and money. Very transparent with zero hidden deposit tricks!',
-    avatar: 'PS'
+    avatar: 'PS',
+    date: '1 week ago',
+    verifiedGoogle: true
   },
   {
+    id: 'rev-03',
     name: 'Marcus & Sarah',
+    email: 'marcus.nomad@gmail.com',
     role: 'Digital Nomads from Germany',
+    bike: 'Honda PCX 160 e:HEV',
     rating: 5,
+    title: 'Seamless keyless IoT unlock & pristine helmets',
     comment: 'Best rental experience in Thailand! Verified passport online, scanned PromptPay, and the bike was ready with 2 clean helmets and phone mount.',
-    avatar: 'MS'
+    avatar: 'MS',
+    date: '2 weeks ago',
+    verifiedGoogle: true
+  },
+  {
+    id: 'rev-04',
+    name: 'David Jenkins',
+    email: 'david.j.uk@gmail.com',
+    role: 'Tourist from London, UK',
+    bike: 'Vespa Sprint 150 i-Get',
+    rating: 5,
+    title: 'Riding the Vespa through Old Town was unforgettable!',
+    comment: 'The Vespa was showroom condition. Doorstep delivery right to our hotel in Silom arrived exactly on the minute. Super polite team on WhatsApp.',
+    avatar: 'DJ',
+    date: '3 weeks ago',
+    verifiedGoogle: true
+  },
+  {
+    id: 'rev-05',
+    name: 'Nattapong K.',
+    email: 'nattapong.dev@gmail.com',
+    role: 'Local Tech Commuter from Ladprao',
+    bike: 'Honda Click 160 ABS',
+    rating: 5,
+    title: 'Great commuter bike while my car was in the shop',
+    comment: 'Click 160 has great punch off the line and huge underseat storage. The smart key phone controller made running errands around Asok effortless.',
+    avatar: 'NK',
+    date: '1 month ago',
+    verifiedGoogle: true
+  },
+  {
+    id: 'rev-06',
+    name: 'Elena Rostova',
+    email: 'elena.design@gmail.com',
+    role: 'Remote Designer from Canada',
+    bike: 'Yamaha Grand Filano Hybrid',
+    rating: 5,
+    title: 'Fuel economy is unbelievable & very quiet engine',
+    comment: 'Rented for 14 days while working out of Thonglor cafes. Hybrid engine is whisper quiet and I only spent ฿120 on gas the entire two weeks!',
+    avatar: 'ER',
+    date: '1 month ago',
+    verifiedGoogle: true
   }
 ];
+
+// Load persisted reviews from localStorage if available, otherwise initialize with baseline data
+let REVIEWS_DATA = (() => {
+  try {
+    if (typeof localStorage !== 'undefined') {
+      const saved = localStorage.getItem('bkk_customer_reviews');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    }
+  } catch (e) {
+    if (typeof console !== 'undefined' && console.warn) {
+      console.warn('Error loading saved reviews from localStorage', e);
+    }
+  }
+  return [...INITIAL_REVIEWS_DATA];
+})();
 
 const FAQ_DATA = [
   {
