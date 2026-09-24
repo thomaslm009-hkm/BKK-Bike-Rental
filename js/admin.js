@@ -84,23 +84,25 @@ const AdminPortal = {
         availableContainer.innerHTML = availableBikes.map(b => `
           <div class="bike-status-mini-card">
             <div class="mini-card-top">
-              <span class="bike-id-pill">${b.id}</span>
+              <div class="mini-card-id-wrap">
+                <span class="bike-id-pill">${b.id}</span>
+                <span class="board-tier-tag ${b.tier === 'premium' ? 'tier-premium' : 'tier-standard'}">${b.tier.toUpperCase()}</span>
+              </div>
               <span class="license-plate-tag">${b.plateNumber}</span>
             </div>
-            <div class="mini-card-model">
-              <span>${b.name}</span>
-              <span class="bike-tier-badge ${b.tier === 'premium' ? 'tier-premium' : 'tier-standard'}">${b.tier.toUpperCase()}</span>
+            <div class="mini-card-model-row">
+              <div class="mini-card-model-title">${b.name}</div>
             </div>
             <div class="mini-card-details">
-              <span>📍 ${b.currentLocation.name.split('(')[0].trim()}</span>
-              <span>🔋 ${b.batteryVoltage}V • ⛽ ${b.fuelLevel}%</span>
+              <span class="details-loc">📍 ${b.currentLocation.name.split('(')[0].trim()}</span>
+              <span class="details-telemetry">🔋 ${b.batteryVoltage}V • ⛽ ${b.fuelLevel}%</span>
             </div>
             <div class="mini-card-actions">
-              <button class="btn btn-xs btn-primary" onclick="AdminPortal.changeBikeStatus('${b.id}', 'rented')">
-                🔑 Dispatch / Rent
+              <button class="btn-board btn-board-rent" onclick="AdminPortal.changeBikeStatus('${b.id}', 'rented')">
+                <span>🔑</span> Dispatch / Rent
               </button>
-              <button class="btn btn-xs btn-secondary" onclick="AdminPortal.changeBikeStatus('${b.id}', 'maintenance')">
-                🔧 Service
+              <button class="btn-board btn-board-maint" onclick="AdminPortal.changeBikeStatus('${b.id}', 'maintenance')">
+                <span>🔧</span> Service
               </button>
             </div>
           </div>
@@ -116,23 +118,25 @@ const AdminPortal = {
         rentedContainer.innerHTML = rentedBikes.map(b => `
           <div class="bike-status-mini-card rented">
             <div class="mini-card-top">
-              <span class="bike-id-pill">${b.id}</span>
+              <div class="mini-card-id-wrap">
+                <span class="bike-id-pill">${b.id}</span>
+                <span class="board-tier-tag ${b.tier === 'premium' ? 'tier-premium' : 'tier-standard'}">${b.tier.toUpperCase()}</span>
+              </div>
               <span class="license-plate-tag">${b.plateNumber}</span>
             </div>
-            <div class="mini-card-model">
-              <span>${b.name}</span>
-              <span class="bike-tier-badge ${b.tier === 'premium' ? 'tier-premium' : 'tier-standard'}">${b.tier.toUpperCase()}</span>
+            <div class="mini-card-model-row">
+              <div class="mini-card-model-title">${b.name}</div>
             </div>
             <div class="mini-card-details">
-              <span>📍 ${b.currentLocation.name.split('(')[0].trim()}</span>
-              <span>⚡ Active Ride • 🔋 ${b.batteryVoltage}V</span>
+              <span class="details-loc">📍 ${b.currentLocation.name.split('(')[0].trim()}</span>
+              <span class="details-telemetry" style="color: #38bdf8;">⚡ Active • 🔋 ${b.batteryVoltage}V</span>
             </div>
             <div class="mini-card-actions">
-              <button class="btn btn-xs btn-success" onclick="AdminPortal.changeBikeStatus('${b.id}', 'available')">
-                🏁 Complete Return
+              <button class="btn-board btn-board-return" onclick="AdminPortal.changeBikeStatus('${b.id}', 'available')">
+                <span>🏁</span> Complete Return
               </button>
-              <button class="btn btn-xs btn-secondary" onclick="AdminPortal.changeBikeStatus('${b.id}', 'maintenance')">
-                🔧 Send Service
+              <button class="btn-board btn-board-maint" onclick="AdminPortal.changeBikeStatus('${b.id}', 'maintenance')">
+                <span>🔧</span> Send Service
               </button>
             </div>
           </div>
@@ -148,20 +152,22 @@ const AdminPortal = {
         maintenanceContainer.innerHTML = maintenanceBikes.map(b => `
           <div class="bike-status-mini-card maintenance">
             <div class="mini-card-top">
-              <span class="bike-id-pill">${b.id}</span>
+              <div class="mini-card-id-wrap">
+                <span class="bike-id-pill">${b.id}</span>
+                <span class="board-tier-tag ${b.tier === 'premium' ? 'tier-premium' : 'tier-standard'}">${b.tier.toUpperCase()}</span>
+              </div>
               <span class="license-plate-tag">${b.plateNumber}</span>
             </div>
-            <div class="mini-card-model">
-              <span>${b.name}</span>
-              <span class="bike-tier-badge ${b.tier === 'premium' ? 'tier-premium' : 'tier-standard'}">${b.tier.toUpperCase()}</span>
+            <div class="mini-card-model-row">
+              <div class="mini-card-model-title">${b.name}</div>
             </div>
             <div class="mini-card-details">
-              <span>🔧 Scheduled Inspection</span>
-              <span>Depot Yard • ${b.odometerKm.toLocaleString()} km</span>
+              <span class="details-loc">🔧 Scheduled Inspection</span>
+              <span class="details-telemetry" style="color: var(--color-warning);">Depot • ${b.odometerKm.toLocaleString()} km</span>
             </div>
             <div class="mini-card-actions">
-              <button class="btn btn-xs btn-success" onclick="AdminPortal.changeBikeStatus('${b.id}', 'available')">
-                ✅ Cleared & Ready
+              <button class="btn-board btn-board-return" onclick="AdminPortal.changeBikeStatus('${b.id}', 'available')">
+                <span>✅</span> Cleared & Ready
               </button>
             </div>
           </div>
@@ -200,7 +206,7 @@ const AdminPortal = {
           <td><span class="bike-id-pill">${b.id}</span></td>
           <td>
             <div class="bike-model-cell-title">${b.name}</div>
-            <span class="bike-tier-badge ${b.tier === 'premium' ? 'tier-premium' : 'tier-standard'}" style="position: static; font-size: 0.68rem; margin-top: 2px;">
+            <span class="board-tier-tag ${b.tier === 'premium' ? 'tier-premium' : 'tier-standard'}" style="margin-top: 4px;">
               ${b.tier.toUpperCase()}
             </span>
           </td>

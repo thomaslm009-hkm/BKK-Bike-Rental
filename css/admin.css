@@ -416,11 +416,44 @@
   border-color: var(--color-warning);
 }
 
+/* Ensure no child elements in status board use absolute positioning */
+.fleet-status-board .bike-tier-badge,
+.board-tier-tag {
+  position: static !important;
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.18rem 0.45rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.board-tier-tag.tier-standard {
+  background: rgba(2, 132, 199, 0.2);
+  border: 1px solid rgba(2, 132, 199, 0.45);
+  color: #38bdf8;
+}
+
+.board-tier-tag.tier-premium {
+  background: rgba(255, 183, 3, 0.2);
+  border: 1px solid rgba(255, 183, 3, 0.45);
+  color: #FFB703;
+}
+
 .mini-card-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.55rem;
+  gap: 0.5rem;
+}
+
+.mini-card-id-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
 }
 
 .bike-id-pill {
@@ -429,49 +462,119 @@
   font-weight: 800;
   color: #fff;
   background: rgba(255, 255, 255, 0.08);
-  padding: 0.2rem 0.55rem;
+  padding: 0.22rem 0.55rem;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   display: inline-block;
 }
 
 .license-plate-tag {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 800;
   color: #0f172a;
   background: #ffffff;
-  padding: 0.2rem 0.55rem;
+  padding: 0.22rem 0.55rem;
   border-radius: 4px;
   border: 2px solid #334155;
   display: inline-flex;
   align-items: center;
   letter-spacing: 0.5px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  white-space: nowrap;
 }
 
-.mini-card-model {
-  font-weight: 700;
-  color: #fff;
-  font-size: 0.92rem;
+.mini-card-model-row {
   margin-bottom: 0.45rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+}
+
+.mini-card-model-title {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
 }
 
 .mini-card-details {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   color: var(--text-muted);
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.details-loc {
+  color: #cbd5e1;
+}
+
+.details-telemetry {
+  color: #94a3b8;
+  font-weight: 600;
 }
 
 .mini-card-actions {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.5rem;
   justify-content: flex-end;
+  align-items: center;
+}
+
+/* Status Board Action Buttons */
+.btn-board {
+  padding: 0.42rem 0.8rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.btn-board-rent {
+  background: linear-gradient(135deg, #FFB703, #F59E0B);
+  color: #0A1128 !important;
+  font-weight: 800;
+  border: none;
+  box-shadow: 0 2px 8px rgba(255, 183, 3, 0.25);
+}
+
+.btn-board-rent:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 183, 3, 0.45);
+}
+
+.btn-board-return {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1.5px solid rgba(16, 185, 129, 0.55);
+  color: #34D399;
+  font-weight: 800;
+}
+
+.btn-board-return:hover {
+  background: #10B981;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-board-maint {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+}
+
+.btn-board-maint:hover {
+  border-color: var(--color-warning);
+  color: var(--color-warning);
+  background: rgba(245, 158, 11, 0.12);
+  transform: translateY(-1px);
 }
 
 .status-empty-state {
