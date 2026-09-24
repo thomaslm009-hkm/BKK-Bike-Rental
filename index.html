@@ -631,7 +631,10 @@
         <h3 class="modal-title">
           <span>🔑</span> <span>IoT Smart Key Controller</span>
         </h3>
-        <button id="hud-close-btn" class="modal-close-btn">✕</button>
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <button id="hud-minimize-btn" class="modal-icon-btn" title="Minimize to Floating Widget" style="background: none; border: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 1rem; cursor: pointer; padding: 0.35rem 0.65rem; border-radius: var(--radius-sm); transition: all 0.2s;">🗕</button>
+          <button id="hud-close-btn" class="modal-close-btn" title="Close / Minimize">✕</button>
+        </div>
       </div>
 
       <div class="modal-body">
@@ -687,6 +690,52 @@
       </div>
     </div>
   </div>
+
+  <!-- ==========================================================================
+       FLOATING ACTIVE RIDE TELEMETRY WIDGET (Persistent Mini HUD)
+       ========================================================================== -->
+  <aside id="floating-ride-widget" class="floating-ride-widget" aria-label="Active Ride Telemetry Monitor" style="display: none;">
+    <div class="ride-widget-card">
+      <div class="ride-widget-header" title="Click to expand full Smart Key controller">
+        <div class="ride-widget-title-group">
+          <span class="widget-pulse-indicator"></span>
+          <div>
+            <h4 id="widget-bike-name" class="widget-bike-name">Honda Click 160</h4>
+            <span id="widget-status-text" class="widget-status-badge">RIDE ACTIVE</span>
+          </div>
+        </div>
+        <button id="widget-expand-btn" class="widget-icon-btn" aria-label="Expand Full Smart Key HUD" title="Expand Full Smart Key HUD">⛶</button>
+      </div>
+
+      <div class="ride-widget-telemetry-grid">
+        <div class="widget-metric-cell">
+          <span class="widget-metric-label">⏱ DURATION</span>
+          <span id="widget-timer" class="widget-metric-val highlight">00:00</span>
+        </div>
+        <div class="widget-metric-cell">
+          <span class="widget-metric-label">⚡ SPEED</span>
+          <span id="widget-speed" class="widget-metric-val">0 km/h</span>
+        </div>
+        <div class="widget-metric-cell">
+          <span class="widget-metric-label">⛽ FUEL</span>
+          <span id="widget-fuel" class="widget-metric-val">95%</span>
+        </div>
+        <div class="widget-metric-cell">
+          <span class="widget-metric-label">🔋 BATTERY</span>
+          <span id="widget-battery" class="widget-metric-val">12.6V</span>
+        </div>
+      </div>
+
+      <div class="ride-widget-actions">
+        <button id="widget-quick-lock-btn" class="btn btn-sm btn-outline-accent">
+          🔒 Quick Lock
+        </button>
+        <button id="widget-open-hud-btn" class="btn btn-sm btn-primary">
+          🔑 Open Controller
+        </button>
+      </div>
+    </div>
+  </aside>
 
   <!-- Scripts -->
   <script src="js/data.js"></script>
