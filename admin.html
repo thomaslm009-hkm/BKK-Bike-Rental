@@ -30,7 +30,10 @@
           <a href="#"><span>🗺️</span> Fleet Live Map</a>
         </li>
         <li class="admin-nav-item">
-          <a href="#fleet-table-section"><span>🛵</span> Vehicles (20 Units)</a>
+          <a href="#fleet-status-board-section"><span>📋</span> Status Board (Avail/Rent/Maint)</a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="#fleet-table-section"><span>🛵</span> Vehicles Directory (20 Units)</a>
         </li>
         <li class="admin-nav-item">
           <a href="#financial-analytics"><span>📊</span> Financial & Break-Even</a>
@@ -70,45 +73,45 @@
       <div class="admin-kpi-grid">
         <div class="kpi-card success">
           <div class="kpi-header">
-            <span class="kpi-label">Fleet Utilization</span>
-            <span class="kpi-icon">📈</span>
+            <span class="kpi-label">Available Fleet</span>
+            <span class="kpi-icon">🟢</span>
           </div>
-          <div id="admin-kpi-utilization" class="kpi-value">85%</div>
+          <div id="admin-kpi-available" class="kpi-value">12 Units</div>
           <div class="kpi-footer">
-            <span class="kpi-trend-up">↑ +12%</span> vs last week target
+            <span style="color: var(--color-success); font-weight: 700;">● Ready to Rent</span> across 5 Prime Stations
           </div>
         </div>
 
         <div class="kpi-card info">
           <div class="kpi-header">
-            <span class="kpi-label">Active Rentals</span>
-            <span class="kpi-icon">🛵</span>
+            <span class="kpi-label">Currently Rented</span>
+            <span class="kpi-icon">🔵</span>
           </div>
-          <div id="admin-kpi-active-rentals" class="kpi-value">12 / 20</div>
+          <div id="admin-kpi-rented" class="kpi-value">7 Units</div>
           <div class="kpi-footer">
-            <span>Standard & Premium in circulation</span>
-          </div>
-        </div>
-
-        <div class="kpi-card">
-          <div class="kpi-header">
-            <span class="kpi-label">Monthly Run-Rate</span>
-            <span class="kpi-icon">💰</span>
-          </div>
-          <div id="admin-kpi-revenue" class="kpi-value">฿255,000</div>
-          <div class="kpi-footer">
-            <span class="kpi-trend-up">✓ Operating Above Break-Even</span>
+            <span style="color: #38bdf8; font-weight: 700;">● In Circulation</span> on Bangkok roads
           </div>
         </div>
 
         <div class="kpi-card warning">
           <div class="kpi-header">
-            <span class="kpi-label">Maintenance Depot</span>
-            <span class="kpi-icon">🔧</span>
+            <span class="kpi-label">Under Maintenance</span>
+            <span class="kpi-icon">🟡</span>
           </div>
           <div id="admin-kpi-maintenance" class="kpi-value">1 Unit</div>
           <div class="kpi-footer">
-            <span>Scheduled oil & brake service</span>
+            <span style="color: var(--color-warning); font-weight: 700;">● In Workshop</span> scheduled inspection
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <span class="kpi-label">Fleet Run-Rate</span>
+            <span class="kpi-icon">💰</span>
+          </div>
+          <div id="admin-kpi-revenue" class="kpi-value">฿255,000</div>
+          <div class="kpi-footer">
+            <span id="admin-kpi-utilization-text" class="kpi-trend-up">35% Fleet Utilization (20 Total)</span>
           </div>
         </div>
       </div>
@@ -165,7 +168,7 @@
           <div style="display: flex; flex-direction: column; gap: 0.8rem; overflow-y: auto; max-height: 420px;">
             <div style="background: var(--bg-surface-elevated); padding: 0.85rem; border-radius: var(--radius-md); border-left: 3px solid var(--color-success);">
               <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
-                <strong style="color: #fff;">Honda Forza 350 (2ทธ-8890)</strong>
+                <strong style="color: #fff;">Honda Forza 350 (1ภม-9901 กทม.)</strong>
                 <span style="color: var(--color-success); font-weight: 700;">Ping OK</span>
               </div>
               <small style="color: var(--text-muted);">Sathorn Hub • Battery 12.9V • Speed 0 km/h</small>
@@ -173,7 +176,7 @@
 
             <div style="background: var(--bg-surface-elevated); padding: 0.85rem; border-radius: var(--radius-md); border-left: 3px solid #38bdf8;">
               <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
-                <strong style="color: #fff;">Yamaha XMAX 300 (4ปผ-7712)</strong>
+                <strong style="color: #fff;">Yamaha XMAX 300 (3ลว-6632 กทม.)</strong>
                 <span style="color: #38bdf8; font-weight: 700;">Active Ride</span>
               </div>
               <small style="color: var(--text-muted);">Sukhumvit Asok • Battery 12.8V • Speed 42 km/h</small>
@@ -181,7 +184,7 @@
 
             <div style="background: var(--bg-surface-elevated); padding: 0.85rem; border-radius: var(--radius-md); border-left: 3px solid var(--color-success);">
               <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
-                <strong style="color: #fff;">Honda Click 160 (1กข-4920)</strong>
+                <strong style="color: #fff;">Honda Click 160 (1กข-4920 กทม.)</strong>
                 <span style="color: var(--color-success); font-weight: 700;">Parked & Ready</span>
               </div>
               <small style="color: var(--text-muted);">Khaosan Station • Battery 12.6V • Fuel 95%</small>
@@ -189,7 +192,7 @@
 
             <div style="background: var(--bg-surface-elevated); padding: 0.85rem; border-radius: var(--radius-md); border-left: 3px solid var(--color-warning);">
               <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
-                <strong style="color: #fff;">Yamaha Scoopy-i (8ฑฒ-6502)</strong>
+                <strong style="color: #fff;">Honda Scoopy Urban (8ฑฒ-6502 กทม.)</strong>
                 <span style="color: var(--color-warning); font-weight: 700;">Service Due</span>
               </div>
               <small style="color: var(--text-muted);">Depot Yard • 12,050 km Odometer service</small>
@@ -198,24 +201,77 @@
         </div>
       </div>
 
+      <!-- Real-Time Fleet Status Breakdown Board -->
+      <section id="fleet-status-board-section" style="margin-bottom: 2.5rem;">
+        <div style="margin-bottom: 1.25rem;">
+          <h2 style="color: #fff; font-size: 1.4rem; font-weight: 800; margin-bottom: 0.25rem;">
+            🛵 Real-Time Fleet Status Board
+          </h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Live tracking of which motorbikes are available, rented out, or in maintenance with ID, Model, and Thai License Plate.
+          </p>
+        </div>
+
+        <div class="fleet-status-board">
+          <!-- 1. AVAILABLE COLUMN -->
+          <div class="status-board-col available-col">
+            <div class="status-col-header">
+              <div class="status-col-title">
+                <span class="status-indicator-dot available"></span>
+                <h4>AVAILABLE FLEET</h4>
+              </div>
+              <span id="badge-count-available" class="status-count-badge available">12 Bikes</span>
+            </div>
+            <p class="status-col-subtitle">Parked at hubs & ready for instant booking</p>
+            <div id="status-cards-available" class="status-cards-list"></div>
+          </div>
+
+          <!-- 2. RENTED COLUMN -->
+          <div class="status-board-col rented-col">
+            <div class="status-col-header">
+              <div class="status-col-title">
+                <span class="status-indicator-dot rented"></span>
+                <h4>CURRENTLY RENTED</h4>
+              </div>
+              <span id="badge-count-rented" class="status-count-badge rented">7 Bikes</span>
+            </div>
+            <p class="status-col-subtitle">Active rentals on Bangkok roads</p>
+            <div id="status-cards-rented" class="status-cards-list"></div>
+          </div>
+
+          <!-- 3. MAINTENANCE COLUMN -->
+          <div class="status-board-col maintenance-col">
+            <div class="status-col-header">
+              <div class="status-col-title">
+                <span class="status-indicator-dot maintenance"></span>
+                <h4>UNDER MAINTENANCE</h4>
+              </div>
+              <span id="badge-count-maintenance" class="status-count-badge maintenance">1 Bike</span>
+            </div>
+            <p class="status-col-subtitle">In workshop for service, oil or brake checks</p>
+            <div id="status-cards-maintenance" class="status-cards-list"></div>
+          </div>
+        </div>
+      </section>
+
       <!-- Fleet Management Data Table -->
       <div id="fleet-table-section" class="fleet-table-card">
         <div class="table-header-bar">
           <div>
-            <h3 style="color: #fff; font-size: 1.2rem; font-weight: 800;">
-              Fleet Inventory & Remote Control (20 Bikes)
+            <h3 style="color: #fff; font-size: 1.25rem; font-weight: 800; margin-bottom: 0.25rem;">
+              Complete Fleet Inventory Directory (20 Bikes)
             </h3>
-            <p style="color: var(--text-muted); font-size: 0.85rem;">Direct commands for immobilizers, maintenance flags, and IoT diagnostics.</p>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Detailed list of all fleet units with Vehicle ID, Model, License Plate, real-time Status & Quick Controls.</p>
           </div>
 
-          <div style="display: flex; gap: 0.8rem;">
-            <input type="text" id="admin-fleet-search" placeholder="Search plate, model, IoT ID..." style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: var(--radius-md); color: #fff; font-size: 0.85rem;">
+          <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+            <input type="text" id="admin-fleet-search" placeholder="Search by ID, Model, or Plate Number..." style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); padding: 0.55rem 1rem; border-radius: var(--radius-md); color: #fff; font-size: 0.85rem; min-width: 260px;">
             
-            <div style="display: flex; gap: 0.3rem;">
-              <button class="btn btn-sm btn-secondary admin-filter-btn active" data-status="all">All</button>
-              <button class="btn btn-sm btn-secondary admin-filter-btn" data-status="available">Available</button>
-              <button class="btn btn-sm btn-secondary admin-filter-btn" data-status="rented">Rented</button>
-              <button class="btn btn-sm btn-secondary admin-filter-btn" data-status="maintenance">Maintenance</button>
+            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+              <button class="btn btn-sm btn-secondary admin-filter-btn active" data-status="all" id="filter-btn-all">All (20)</button>
+              <button class="btn btn-sm btn-secondary admin-filter-btn" data-status="available" id="filter-btn-available">🟢 Available (12)</button>
+              <button class="btn btn-sm btn-secondary admin-filter-btn" data-status="rented" id="filter-btn-rented">🔵 Rented (7)</button>
+              <button class="btn btn-sm btn-secondary admin-filter-btn" data-status="maintenance" id="filter-btn-maintenance">🟡 Maintenance (1)</button>
             </div>
           </div>
         </div>
@@ -223,13 +279,14 @@
         <table class="admin-table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Model & Plate</th>
-              <th>Tier</th>
+              <th>Vehicle ID</th>
+              <th>Motorbike Model</th>
+              <th>License Plate</th>
               <th>Status</th>
+              <th>Quick Status Change</th>
               <th>Diagnostics</th>
-              <th>Location</th>
-              <th>Actions</th>
+              <th>Current Hub / Location</th>
+              <th>IoT Commands</th>
             </tr>
           </thead>
           <tbody id="admin-fleet-tbody"></tbody>

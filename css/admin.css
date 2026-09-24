@@ -278,10 +278,249 @@
 .status-rented { background: rgba(2, 132, 199, 0.15); color: #38bdf8; }
 .status-maintenance { background: rgba(245, 158, 11, 0.15); color: var(--color-warning); }
 
+/* --- Fleet Status Board (Available / Rented / Maintenance) --- */
+.fleet-status-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.status-board-col {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.status-board-col.available-col {
+  border-top: 4px solid var(--color-success);
+}
+
+.status-board-col.rented-col {
+  border-top: 4px solid #38bdf8;
+}
+
+.status-board-col.maintenance-col {
+  border-top: 4px solid var(--color-warning);
+}
+
+.status-col-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.status-col-title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.status-col-title h4 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.status-indicator-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-indicator-dot.available {
+  background: var(--color-success);
+  box-shadow: 0 0 10px var(--color-success);
+}
+
+.status-indicator-dot.rented {
+  background: #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
+}
+
+.status-indicator-dot.maintenance {
+  background: var(--color-warning);
+  box-shadow: 0 0 10px var(--color-warning);
+}
+
+.status-count-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.status-count-badge.available {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--color-success);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-count-badge.rented {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.status-count-badge.maintenance {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--color-warning);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.status-col-subtitle {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.status-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+/* Individual Bike Status Card */
+.bike-status-mini-card {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  transition: all var(--transition-fast);
+}
+
+.bike-status-mini-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.bike-status-mini-card.rented:hover {
+  border-color: #38bdf8;
+}
+
+.bike-status-mini-card.maintenance:hover {
+  border-color: var(--color-warning);
+}
+
+.mini-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.bike-id-pill {
+  font-family: monospace;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: inline-block;
+}
+
+.license-plate-tag {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #0f172a;
+  background: #ffffff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  border: 2px solid #334155;
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+
+.mini-card-model {
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.92rem;
+  margin-bottom: 0.45rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mini-card-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.65rem;
+}
+
+.mini-card-actions {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: flex-end;
+}
+
+.status-empty-state {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-md);
+}
+
+/* Quick Status Select Control */
+.status-quick-select {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.status-quick-select:hover,
+.status-quick-select:focus {
+  border-color: var(--color-accent);
+  outline: none;
+}
+
+.btn-xs {
+  padding: 0.25rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.bike-model-cell-title {
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
 @media (max-width: 1200px) {
   .admin-kpi-grid { grid-template-columns: repeat(2, 1fr); }
   .breakeven-card { grid-column: span 2; }
   .admin-grid-split { grid-template-columns: 1fr; }
+  .fleet-status-board { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
