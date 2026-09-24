@@ -14,6 +14,7 @@ const AdminPortal = {
     this.renderFleetTable();
     this.initMap();
     this.bindEvents();
+    this.initNavScrollSpy();
   },
 
   refreshMetrics() {
@@ -336,6 +337,57 @@ const AdminPortal = {
         this.renderFleetTable();
       });
     }
+  },
+
+  initNavScrollSpy() {
+    const navLinks = document.querySelectorAll('.admin-nav-item a[href^="#"]');
+    const sectionIds = ['fleet-map-section', 'fleet-status-board-section', 'fleet-table-section'];
+
+    const updateActiveNav = () => {
+      const scrollPos = window.scrollY + 200;
+      let activeId = null;
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el && el.offsetTop <= scrollPos) {
+          activeId = sectionIds[i];
+          break;
+        }
+      }
+
+      if (!activeId && window.scrollY < 200) {
+        activeId = 'fleet-map-section';
+      }
+
+      navLinks.forEach(link => {
+        const item = link.closest('.admin-nav-item');
+        if (!item) return;
+        if (activeId && link.getAttribute('href') === `#${activeId}`) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav();
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const targetId = link.getAttribute('href');
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, null, targetId);
+          }
+          navLinks.forEach(l => l.closest('.admin-nav-item')?.classList.remove('active'));
+          link.closest('.admin-nav-item')?.classList.add('active');
+        }
+      });
+    });
   }
 };
 

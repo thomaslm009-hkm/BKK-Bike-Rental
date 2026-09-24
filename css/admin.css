@@ -2,6 +2,10 @@
    BKK Motorbike Rental - Admin Fleet Dashboard Styles
    ========================================================================== */
 
+html {
+  scroll-behavior: smooth;
+}
+
 .admin-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -16,6 +20,20 @@
   padding: 2rem 1.25rem;
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.admin-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: var(--radius-full);
 }
 
 .admin-brand {
@@ -63,7 +81,13 @@
 /* --- Admin Main Content --- */
 .admin-main {
   padding: 2.5rem 3rem;
-  overflow-y: auto;
+  min-width: 0;
+}
+
+#fleet-map-section,
+#fleet-status-board-section,
+#fleet-table-section {
+  scroll-margin-top: 1.5rem;
 }
 
 .admin-topbar {
