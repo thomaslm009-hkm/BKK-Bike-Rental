@@ -6,6 +6,7 @@ const ReviewsManager = {
   currentUser: null,
   selectedRating: 5,
   isMoreExpanded: false,
+  isEventsBound: false,
 
   ratingTexts: {
     5: '5.0 - Exceptional Experience!',
@@ -18,7 +19,10 @@ const ReviewsManager = {
   init() {
     this.loadCurrentUser();
     this.renderReviews();
-    this.bindEvents();
+    if (!this.isEventsBound) {
+      this.bindEvents();
+      this.isEventsBound = true;
+    }
   },
 
   loadCurrentUser() {
@@ -135,7 +139,7 @@ const ReviewsManager = {
 
     if (this.isMoreExpanded) {
       const moreSection = document.getElementById('reviews-more-wrapper');
-      if (moreSection) {
+      if (moreSection && typeof moreSection.scrollIntoView === 'function') {
         moreSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     }
@@ -354,7 +358,7 @@ const ReviewsManager = {
 
     // Smoothly scroll to the Rider Feedback section
     const feedbackSection = document.getElementById('reviews-grid');
-    if (feedbackSection) {
+    if (feedbackSection && typeof feedbackSection.scrollIntoView === 'function') {
       feedbackSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   },
@@ -418,3 +422,17 @@ const ReviewsManager = {
     }
   }
 };
+
+// Expose globally on window
+if (typeof window !== 'undefined') {
+  window.ReviewsManager = ReviewsManager;
+}
+
+// Auto-run if document is already ready
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => ReviewsManager.init());
+  } else {
+    ReviewsManager.init();
+  }
+}

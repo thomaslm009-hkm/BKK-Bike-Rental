@@ -352,7 +352,7 @@
           </div>
         </div>
         <div class="reviews-btn-group">
-          <button id="btn-open-review-modal" class="btn btn-accent btn-write-review">
+          <button id="btn-open-review-modal" class="btn btn-accent btn-write-review" onclick="ReviewsManager.openReviewModal();">
             <span>✍️</span> <span>Write a Review</span>
           </button>
         </div>
@@ -371,7 +371,7 @@
 
       <!-- See More Toggle Button -->
       <div style="text-align: center; margin-top: 2rem;">
-        <button id="btn-toggle-more-reviews" class="btn btn-secondary btn-see-more-reviews">
+        <button id="btn-toggle-more-reviews" class="btn btn-secondary btn-see-more-reviews" onclick="ReviewsManager.toggleSeeMore();">
           <span id="btn-toggle-more-icon">💬</span>
           <span id="btn-toggle-more-text">See More Reviews</span>
         </button>
@@ -744,7 +744,7 @@
             Share your Bangkok riding experience with fellow travelers & expats
           </p>
         </div>
-        <button id="review-modal-close-btn" class="modal-close-btn">✕</button>
+        <button id="review-modal-close-btn" class="modal-close-btn" onclick="ReviewsManager.closeReviewModal();">✕</button>
       </div>
 
       <div class="modal-body">
@@ -765,7 +765,7 @@
               </div>
             </div>
 
-            <button type="button" id="btn-google-login" class="btn-google-sign-in">
+            <button type="button" id="btn-google-login" class="btn-google-sign-in" onclick="ReviewsManager.handleGoogleLogin();">
               <svg width="18" height="18" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                 <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -779,7 +779,7 @@
 
             <div style="display: flex; gap: 0.5rem; align-items: center;">
               <input type="email" id="custom-gmail-input" class="form-input" placeholder="e.g. yourname@gmail.com" style="margin: 0; font-size: 0.88rem; flex: 1;">
-              <button type="button" id="btn-custom-gmail-submit" class="btn btn-secondary btn-sm" style="white-space: nowrap; padding: 0.65rem 1rem;">
+              <button type="button" id="btn-custom-gmail-submit" class="btn btn-secondary btn-sm" onclick="ReviewsManager.handleCustomGmailSubmit();" style="white-space: nowrap; padding: 0.65rem 1rem;">
                 Connect Gmail
               </button>
             </div>
@@ -797,7 +797,7 @@
                 <span id="auth-user-email" style="color: var(--text-muted); font-size: 0.8rem;">thomas.rider.bkk@gmail.com</span>
               </div>
             </div>
-            <button type="button" id="btn-auth-switch" class="btn-text-sm" title="Switch Gmail account">Switch Account</button>
+            <button type="button" id="btn-auth-switch" class="btn-text-sm" onclick="ReviewsManager.switchAccount();" title="Switch Gmail account">Switch Account</button>
           </div>
         </div>
 
@@ -810,11 +810,11 @@
               <span id="rating-text-feedback" style="color: var(--color-accent); font-weight: 700; font-size: 0.85rem;">5.0 - Exceptional Experience!</span>
             </div>
             <div class="interactive-star-rating" id="interactive-star-rating">
-              <span class="star-btn active" data-rating="1" title="1 Star">★</span>
-              <span class="star-btn active" data-rating="2" title="2 Stars">★</span>
-              <span class="star-btn active" data-rating="3" title="3 Stars">★</span>
-              <span class="star-btn active" data-rating="4" title="4 Stars">★</span>
-              <span class="star-btn active" data-rating="5" title="5 Stars">★</span>
+              <span class="star-btn active" data-rating="1" onclick="ReviewsManager.setRating(1);" title="1 Star">★</span>
+              <span class="star-btn active" data-rating="2" onclick="ReviewsManager.setRating(2);" title="2 Stars">★</span>
+              <span class="star-btn active" data-rating="3" onclick="ReviewsManager.setRating(3);" title="3 Stars">★</span>
+              <span class="star-btn active" data-rating="4" onclick="ReviewsManager.setRating(4);" title="4 Stars">★</span>
+              <span class="star-btn active" data-rating="5" onclick="ReviewsManager.setRating(5);" title="5 Stars">★</span>
             </div>
           </div>
 
@@ -857,7 +857,7 @@
 
           <!-- Actions -->
           <div style="display: flex; gap: 0.75rem; justify-content: flex-end; align-items: center;">
-            <button type="button" id="review-cancel-btn" class="btn btn-secondary">
+            <button type="button" id="review-cancel-btn" class="btn btn-secondary" onclick="ReviewsManager.closeReviewModal();">
               Cancel
             </button>
             <button type="submit" id="btn-submit-review" class="btn btn-primary" style="min-width: 175px;">

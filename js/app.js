@@ -9,6 +9,7 @@ const App = {
 
   init() {
     this.renderFleetGrid();
+    if (typeof ReviewsManager !== 'undefined') ReviewsManager.init();
     this.renderReviews();
     this.renderFAQ();
     this.bindGlobalEvents();
@@ -17,7 +18,6 @@ const App = {
     // Init modules
     BookingEngine.init();
     SmartKeyHUD.init();
-    if (window.ReviewsManager) ReviewsManager.init();
     if (window.AdminPortal) AdminPortal.init();
   },
 
@@ -94,7 +94,7 @@ const App = {
   },
 
   renderReviews() {
-    if (window.ReviewsManager) {
+    if (typeof ReviewsManager !== 'undefined') {
       ReviewsManager.renderReviews();
       return;
     }
